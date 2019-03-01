@@ -65,8 +65,8 @@ namespace Anima2D
 			if(!spriteMesh && sprite)
 			{
 				string spritePath = AssetDatabase.GetAssetPath(sprite);
-				string directory = Path.GetDirectoryName(spritePath);
-				string assetPath = AssetDatabase.GenerateUniqueAssetPath(directory + Path.DirectorySeparatorChar + sprite.name + ".asset");
+				string directory = System.IO.Path.GetDirectoryName(spritePath);
+				string assetPath = AssetDatabase.GenerateUniqueAssetPath(directory + System.IO.Path.DirectorySeparatorChar + sprite.name + ".asset");
 				
 				spriteMesh = ScriptableObject.CreateInstance<SpriteMesh>();
 				InitFromSprite(spriteMesh,sprite);

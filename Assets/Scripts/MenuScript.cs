@@ -5,6 +5,7 @@ using UnityEngine;
 public class MenuScript : MonoBehaviour
 {
     public GameObject SceneFader;
+    public Camera mainCam;
 
     public void StartGame()
     {

@@ -44,6 +44,6 @@ public class FadeScript : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(name);
-        DontDestroyOnLoad(GameObject.Find("Music"));
+        //DontDestroyOnLoad(GameObject.Find("Music"));
     }
 }

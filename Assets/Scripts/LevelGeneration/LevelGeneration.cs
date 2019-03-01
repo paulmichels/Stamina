@@ -1,30 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelGeneration : MonoBehaviour {
-	private Vector2 worldSize = new Vector2(2,2);
-	private Room[,] rooms;
-	private List<Vector2> takenPositions = new List<Vector2>();
-	private int gridSizeX, gridSizeY, numberOfRooms = 10;
-	public GameObject roomWhiteObj;
+	Vector2 worldSize = new Vector2(4,4);
+	Room[,] rooms;
+    Path[,,] paths;
+	List<Vector2> takenPositions = new List<Vector2>();
+	int gridSizeX, gridSizeY, numberOfRooms = 10, numberOfPath = 4;
+	public GameObject RoomSpritePrefab, PathSpritePrefab, gameManager;
 
 	public void CreateLevel (GameObject LevelCreator) {
-		if (numberOfRooms >= (worldSize.x * 2) * (worldSize.y * 2)){
+      
+        if (numberOfRooms >= (worldSize.x * 2) * (worldSize.y * 2)){
 			numberOfRooms = Mathf.RoundToInt((worldSize.x * 2) * (worldSize.y * 2));
 		}
 		gridSizeX = Mathf.RoundToInt(worldSize.x);
 		gridSizeY = Mathf.RoundToInt(worldSize.y);
-		CreateRooms();
+		Create();
 		SetRoomDoors();
-		DrawMap(LevelCreator);
+        LevelContainer levelContainer = LevelCreator.GetComponent<LevelContainer>();
+        foreach (Room room in rooms)
+        {
+            if (room != null)
+            {
+                levelContainer.rooms.Add(room);
+            }
+        }
+        foreach (Path path in paths)
+        {
+            if (path != null)
+            {
+                levelContainer.paths.Add(path);
+            }
+        }
+        levelContainer.worldSize = new Vector2((worldSize.x*2)-1, (worldSize.y*2)-1);
+        levelContainer.numberOfPath = numberOfPath;
     }
 
-	private void CreateRooms(){
-		//setup
-		rooms = new Room[gridSizeX * 2,gridSizeY * 2];
-		rooms[gridSizeX,gridSizeY] = new Room(Vector2.zero, 0);
+	void Create(){
+		rooms = new Room[gridSizeX * 2, gridSizeY * 2];
+        paths = new Path[gridSizeX * 2, gridSizeY * 2, numberOfPath];
+		rooms[gridSizeX,gridSizeY] = new Room(Vector2.zero, Room.Type.Start, true); // La salle est le début du niveau
+        gameManager.GetComponent<GameManager>().CurrentRoom = rooms[gridSizeX, gridSizeY];
 		takenPositions.Insert(0,Vector2.zero);
 		Vector2 checkPos = Vector2.zero;
 		//magic numbers
@@ -38,21 +56,42 @@ public class LevelGeneration : MonoBehaviour {
 			//test new position
 			if (NumberOfNeighbors(checkPos, takenPositions) > 1 && Random.value > randomCompare){
 				int iterations = 0;
-				do {
+				do{
 					checkPos = SelectiveNewPosition();
 					iterations++;
-				} while(NumberOfNeighbors(checkPos, takenPositions) > 1 && iterations < 100);
+				}while(NumberOfNeighbors(checkPos, takenPositions) > 1 && iterations < 100);
 				if (iterations >= 50)
 					print("error: could not create with fewer neighbors than : " + NumberOfNeighbors(checkPos, takenPositions));
 			}
-
             //finalize position
-			rooms[(int) checkPos.x + gridSizeX, (int) checkPos.y + gridSizeY] = new Room(checkPos, i != numberOfRooms-3?Random.Range(1, 9):10);
-			takenPositions.Insert(0,checkPos);
-		}	
+            if(i != numberOfRooms - 2)
+            {
+                int random = Random.Range(1, 10);
+                if (random >= 1 && random <= 3) // La salle est une salle vide (30% de chance)
+                {
+                    rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, Room.Type.Empty, false);
+                    takenPositions.Insert(0, checkPos);
+                }
+                else if (random >= 4 && random <= 5) // La salle contient un trésor (20% de chance)
+                {
+                    rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, Room.Type.Treasure, false);
+                    takenPositions.Insert(0, checkPos);
+                }
+                else if (random >= 6 && random <= 10) // La salle contient un combat (50% de chance)
+                {
+                    rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, Room.Type.Battle, false);
+                    takenPositions.Insert(0, checkPos);
+                }
+            }
+            else // Dernière itération : la salle est la fin du niveau
+            {
+                rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, Room.Type.End, false);
+                takenPositions.Insert(0, checkPos);
+            }
+        }	
 	}
 
-	private Vector2 NewPosition(){
+	Vector2 NewPosition(){
 		int x = 0, y = 0;
 		Vector2 checkingPos = Vector2.zero;
 		do{
@@ -63,15 +102,15 @@ public class LevelGeneration : MonoBehaviour {
 			bool positive = (Random.value < 0.5f);//pick whether to be positive or negative on that axis
 			if (UpDown){ //find the position bnased on the above bools
 				if (positive){
-					y += 1;
+					y += 2;
 				}else{
-					y -= 1;
+					y -= 2;
 				}
 			}else{
 				if (positive){
-					x += 1;
+					x += 2;
 				}else{
-					x -= 1;
+					x -= 2;
 				}
 			}
 			checkingPos = new Vector2(x,y);
@@ -79,7 +118,7 @@ public class LevelGeneration : MonoBehaviour {
 		return checkingPos;
 	}
 
-	private Vector2 SelectiveNewPosition(){ // method differs from the above in the two commented ways
+	Vector2 SelectiveNewPosition(){ // method differs from the above in the two commented ways
 		int index = 0, inc = 0;
 		int x =0, y =0;
 		Vector2 checkingPos = Vector2.zero;
@@ -97,15 +136,15 @@ public class LevelGeneration : MonoBehaviour {
 			bool positive = (Random.value < 0.5f);
 			if (UpDown){
 				if (positive){
-					y += 1;
+					y += 2;
 				}else{
-					y -= 1;
+					y -= 2;
 				}
 			}else{
 				if (positive){
-					x += 1;
+					x += 2;
 				}else{
-					x -= 1;
+					x -= 2;
 				}
 			}
 			checkingPos = new Vector2(x,y);
@@ -116,7 +155,7 @@ public class LevelGeneration : MonoBehaviour {
 		return checkingPos;
 	}
 
-	private int NumberOfNeighbors(Vector2 checkingPos, List<Vector2> usedPositions){
+	int NumberOfNeighbors(Vector2 checkingPos, List<Vector2> usedPositions){
 		int ret = 0; // start at zero, add 1 for each side there is already a room
 		if (usedPositions.Contains(checkingPos + Vector2.right)){ //using Vector.[direction] as short hands, for simplicity
 			ret++;
@@ -133,53 +172,75 @@ public class LevelGeneration : MonoBehaviour {
 		return ret;
 	}
 
-	private void DrawMap(GameObject LevelCreator){
-		foreach (Room room in rooms){
-			if (room == null){
-				continue; //skip where there is no room
-			}
-			Vector2 drawPos = room.gridPos;
-			drawPos.x *= 16;//aspect ratio of map sprite
-			drawPos.y *= 8;
-			//create map obj and assign its variables
-			MapSpriteSelector mapper = Object.Instantiate(roomWhiteObj, drawPos, Quaternion.identity).GetComponent<MapSpriteSelector>();
-            mapper.transform.parent = LevelCreator.transform;
-            mapper.name = room.name;
-            mapper.type = room.type;
-			mapper.up = room.doorTop;
-			mapper.down = room.doorBot;
-			mapper.right = room.doorRight;
-			mapper.left = room.doorLeft;
-		}
-	}
-
-	private void SetRoomDoors(){
+    //Pour chaque coordonnées de la grille, on regarde si elle contient une pièce
+    //Si oui, on regarde si elle possède des voisins dans chaque directions
+    //Si oui, on crée un chemin entre ces deux pièces
+	void SetRoomDoors(){
 		for (int x = 0; x < ((gridSizeX * 2)); x++){
 			for (int y = 0; y < ((gridSizeY * 2)); y++){
-				if (rooms[x,y] == null){
+				if (rooms[x,y] == null){ //Si pas de pièce on continue
 					continue;
 				}
-				Vector2 gridPosition = new Vector2(x,y);
-				if (y - 1 < 0){ //check above
-					rooms[x,y].doorBot = false;
+				if (y - 2 < 0){ //Vérification en bas
+                    rooms[x,y].doorBot = false;
 				}else{
-					rooms[x,y].doorBot = (rooms[x,y-1] != null);
-				}
-				if (y + 1 >= gridSizeY * 2){ //check bellow
-					rooms[x,y].doorTop = false;
+                    if(rooms[x, y - 2] != null)
+                    {
+                        rooms[x, y].doorBot = true;
+                        if (paths[x, y, 0] == null)
+                        {
+                            for(int z = 0; z < numberOfPath; z++)
+                            {
+                                paths[x, y - 1, z] = new Path(new Vector2(rooms[x, y].gridPos.x, rooms[x, y].gridPos.y - 1), z, true);
+                            }
+                        }
+                    }
+                }
+				if (y + 2 >= gridSizeY * 2){ //Vérification en haut
+                    rooms[x,y].doorTop = false;
 				}else{
-					rooms[x,y].doorTop = (rooms[x,y+1] != null);
-				}
-				if (x - 1 < 0){ //check left
-					rooms[x,y].doorLeft = false;
+                    if(rooms[x, y + 2] != null)
+                    {
+                        rooms[x, y].doorTop = true;
+                        if (paths[x, y, 0] == null)
+                        {
+                            for (int z = 0; z < numberOfPath; z++)
+                            {
+                                paths[x, y + 1, z] = new Path(new Vector2(rooms[x, y].gridPos.x, rooms[x, y].gridPos.y + 1), z, true);
+                            }
+                        }
+                    }
+                }
+				if (x - 2 < 0){ //Vérification à gauche
+                    rooms[x,y].doorLeft = false;
 				}else{
-					rooms[x,y].doorLeft = (rooms[x - 1,y] != null);
-				}
-				if (x + 1 >= gridSizeX * 2){ //check right
+                    if(rooms[x - 2, y] != null)
+                    {
+                        rooms[x, y].doorLeft = true;
+                        if (paths[x, y, 0] == null)
+                        {
+                            for (int z = 0; z < numberOfPath; z++)
+                            {
+                                paths[x - 1, y, z] = new Path(new Vector2(rooms[x, y].gridPos.x - 1, rooms[x, y].gridPos.y), z, false);
+                            }
+                        }
+                    }
+                }
+				if (x + 2 >= gridSizeX * 2){ //Vérification à droite
 					rooms[x,y].doorRight = false;
 				}else{
-					rooms[x,y].doorRight = (rooms[x+1,y] != null);
-				}
+                    if(rooms[x + 2, y] != null)
+                    {
+                        rooms[x, y].doorRight = true;
+                        if (paths[x, y, 0] == null)
+                        {
+                            for (int z = 0; z < numberOfPath; z++)
+                            {
+                                paths[x + 1, y, z] = new Path(new Vector2(rooms[x, y].gridPos.x + 1, rooms[x, y].gridPos.y), z, false);
+                            }
+                        }
+                    }
+                }
 			}
 		}
 	}

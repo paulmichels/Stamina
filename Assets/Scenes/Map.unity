@@ -452,6 +452,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325179468}
   m_CullTransparentMesh: 0
+--- !u!1 &339468192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 339468194}
+  - component: {fileID: 339468193}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &339468193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339468192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f053dc9d9e97a4b86ac3abf69510af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &339468194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339468192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 605.09906, y: 298.96826, z: 1467.4979}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &368427122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,7 +1147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4784314, g: 0.454902, b: 0.454902, a: 1}
+  m_Color: {r: 0.509434, g: 0.48300108, b: 0.48300108, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1468,6 +1511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneFader: {fileID: 1510537940}
   LevelCreator: {fileID: 1022468238}
+  Music: {fileID: 0}
 --- !u!114 &876066017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1480,8 +1524,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f288b11a4078a5040b0f6657b4b4e36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomWhiteObj: {fileID: 1975706786332780, guid: a1fe431a2bc4a2940b2503b8f131da18,
+  RoomSpritePrefab: {fileID: 1975706786332780, guid: a3dd59e6df2bac14ea66358ebc1c8e00,
     type: 3}
+  PathSpritePrefab: {fileID: 1975706786332780, guid: 6a966741f218a954c8f232c8a328224b,
+    type: 3}
+  gameManager: {fileID: 0}
 --- !u!1 &925897242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1776,6 +1823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1022468239}
   - component: {fileID: 1022468240}
+  - component: {fileID: 1022468241}
   m_Layer: 5
   m_Name: LevelCreator
   m_TagString: Untagged
@@ -1809,8 +1857,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f288b11a4078a5040b0f6657b4b4e36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomWhiteObj: {fileID: 1975706786332780, guid: a1fe431a2bc4a2940b2503b8f131da18,
+  RoomSpritePrefab: {fileID: 1975706786332780, guid: a3dd59e6df2bac14ea66358ebc1c8e00,
     type: 3}
+  PathSpritePrefab: {fileID: 1975706786332780, guid: 6a966741f218a954c8f232c8a328224b,
+    type: 3}
+  gameManager: {fileID: 339468192}
+--- !u!114 &1022468241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022468238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d85945eb2b8ab41897ef78f71576e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldSize: {x: 0, y: 0}
+  numberOfPath: 0
+  StartRoom: {fileID: 21300000, guid: 792c6c2f1c4be144aab660074c9e090c, type: 3}
+  EndRoom: {fileID: 21300000, guid: 960e331c8e131094092944646ede3e26, type: 3}
+  UnexploredRoom: {fileID: 21300000, guid: 347e49c912a14c14894389136f215750, type: 3}
+  EmptyRoom: {fileID: 21300000, guid: 2ec69dc4279492c4e985bf0bfacd5307, type: 3}
+  TreasureRoom: {fileID: 21300000, guid: debb3433ef9f9f6418670d73eaaba4a6, type: 3}
+  BattleRoom: {fileID: 21300000, guid: 7f7aed04100c35b4eb20b6840ba82bdb, type: 3}
+  BossRoom: {fileID: 21300000, guid: d7910ea57c2273a4aa201626b7bc4215, type: 3}
+  UnexploredPath: {fileID: 21300000, guid: 3891e9460981c3147a70feab17518d01, type: 3}
+  EmptyPath: {fileID: 21300000, guid: 3891e9460981c3147a70feab17518d01, type: 3}
+  BattlePath: {fileID: 21300000, guid: 68c0bb015bb806d47bb9ae812703fc5b, type: 3}
+  TreasurePath: {fileID: 21300000, guid: 384910113110cdb4096b9788f9e48e35, type: 3}
+  TrapPath: {fileID: 21300000, guid: f90bbd4ec10ec9f428268caa44edfcdb, type: 3}
+  GlowingEffect: {fileID: 21300000, guid: 7516765ecd262ae4ebad599360639216, type: 3}
+  PlayerIcon: {fileID: 21300000, guid: c8f3433a1fe9859479bf8aa92a80c126, type: 3}
 --- !u!1 &1042040439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1939,36 +2018,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042040439}
   m_CullTransparentMesh: 0
---- !u!1 &1052308736
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1052308737}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1052308737
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1052308736}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 579.24426, y: 295.74365, z: 88.875}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1056235222
 GameObject:
   m_ObjectHideFlags: 0
@@ -2374,8 +2423,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9675ac07a44bdaa4eb59a45bfa63097e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneFader: {fileID: 1510537940}
-  LevelCreator: {fileID: 1022468238}
+  SceneFader: {fileID: 0}
+  LevelCreator: {fileID: 0}
+  Music: {fileID: 0}
 --- !u!1 &1579151910
 GameObject:
   m_ObjectHideFlags: 0
