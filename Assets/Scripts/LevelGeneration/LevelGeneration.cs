@@ -191,7 +191,7 @@ public class LevelGeneration : MonoBehaviour {
                         {
                             for(int z = 0; z < numberOfPath; z++)
                             {
-                                paths[x, y - 1, z] = new Path(new Vector2(rooms[x, y].gridPos.x, rooms[x, y].gridPos.y - 1), z, true);
+                                paths[x, y - 1, z] = new Path(new Vector2(rooms[x, y].gridPos.x, rooms[x, y].gridPos.y - 1), z, false);
                             }
                         }
                     }
@@ -206,7 +206,7 @@ public class LevelGeneration : MonoBehaviour {
                         {
                             for (int z = 0; z < numberOfPath; z++)
                             {
-                                paths[x, y + 1, z] = new Path(new Vector2(rooms[x, y].gridPos.x, rooms[x, y].gridPos.y + 1), z, true);
+                                paths[x, y + 1, z] = new Path(new Vector2(rooms[x, y].gridPos.x, rooms[x, y].gridPos.y + 1), z, false);
                             }
                         }
                     }

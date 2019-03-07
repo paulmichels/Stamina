@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public Room PreviousRoom, NextRoom, CurrentRoom;
     public List<Path> paths;
+    public Path CurrentPath;
 
     private void Start()
     {

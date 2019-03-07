@@ -27,6 +27,11 @@ public class DoorScript : MonoBehaviour
                 break;
         }
 
+        if (type == Type.Exit)
+        {
+            GameObject.Find("LevelCreator").GetComponent<LevelContainer>().rooms.Find(obj => obj.Equals(gameManager.CurrentRoom)).isExplored = true;
+        }
+
         float fadeTime = SceneFader.GetComponent<FadeScript>().BeginFade(1);
         StartCoroutine(SceneFader.GetComponent<FadeScript>().LoadLevel("Room", fadeTime));
     }

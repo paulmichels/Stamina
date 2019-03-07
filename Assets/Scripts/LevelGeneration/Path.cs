@@ -7,7 +7,7 @@ public class Path
     public enum Type : short { Empty, Battle, Treasure, Trap };
     public Vector2 gridPos;
     public bool isExplored;
-    public Type type;
+    public Type type = Type.Battle;
     public int id;
 
     public Path(Vector2 gridPos, int id, bool isExplored)
@@ -15,7 +15,7 @@ public class Path
         this.gridPos = gridPos;
         this.isExplored = isExplored;
         this.id = id;
-        RandomizeType();
+        //RandomizeType();
     }
 
     private void RandomizeType()

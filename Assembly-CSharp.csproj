@@ -60,28 +60,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Anima2D\Scripts\Bone2D.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\Control.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\EditorUpdaterProxy.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\Ik2D.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\IkCCD2D.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\IkGroup.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\IkLimb2D.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\IkSolver2D.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\IkSolver2DCCD.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\IkSolver2DLimb.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\MathUtils.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\Pose.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\PoseManager.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\SpriteMesh.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\SpriteMeshAnimation.cs" />
-    <Compile Include="Assets\Anima2D\Scripts\SpriteMeshInstance.cs" />
+    <Compile Include="Assets\Scripts\Control\ControlPlayerScript.cs" />
     <Compile Include="Assets\Scripts\DoorScript.cs" />
     <Compile Include="Assets\Scripts\Effects\GlowingScript.cs" />
+    <Compile Include="Assets\Scripts\Entities.cs" />
+    <Compile Include="Assets\Scripts\Entities\PlayerScript.cs" />
+    <Compile Include="Assets\Scripts\Events\BattleEvent.cs" />
+    <Compile Include="Assets\Scripts\Events\TrapEvent.cs" />
     <Compile Include="Assets\Scripts\FadeScript.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\HUDScript.cs" />
+    <Compile Include="Assets\Scripts\LevelGeneration\InstantiateMap.cs" />
     <Compile Include="Assets\Scripts\LevelGeneration\InstantiateMinimap.cs" />
+    <Compile Include="Assets\Scripts\LevelGeneration\InstantiatePathScene.cs" />
+    <Compile Include="Assets\Scripts\LevelGeneration\InstantiateRoomEvent.cs" />
     <Compile Include="Assets\Scripts\LevelGeneration\LevelContainer.cs" />
     <Compile Include="Assets\Scripts\LevelGeneration\LevelGeneration.cs" />
     <Compile Include="Assets\Scripts\LevelGeneration\Path.cs" />
@@ -91,49 +83,36 @@
     <Compile Include="Assets\Scripts\LevelScript.cs" />
     <Compile Include="Assets\Scripts\MapScript.cs" />
     <Compile Include="Assets\Scripts\MenuScript.cs" />
-    <Compile Include="Assets\Scripts\PlayerScript.cs" />
-    <None Include="Assets\Anima2D\Version.txt" />
-    <None Include="Assets\Sprites\HUD\ColorfulButtons\Credits.txt" />
-    <None Include="Assets\Anima2D\Licenses.txt" />
-    <None Include="Assets\Anima2D\Readme.txt" />
+    <Compile Include="Assets\Scripts\ParcelScript.cs" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Ninja Files\Read Me.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <Reference Include="Cinemachine">
       <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Animation.Runtime">
-      <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.2D.IK.Editor">
-      <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.IK.Runtime">
-      <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="PsdPlugin">
-      <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Psdimporter.Editor">
-      <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InternalAPIEngineBridge.001">
-      <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Common.Runtime">
-      <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Animation.Editor">
-      <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Triangle.Runtime">
-      <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.2D.Triangle.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
       <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
@@ -141,14 +120,8 @@
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.2D.Common.Editor">
-      <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
       <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InternalAPIEditorBridge.001">
-      <HintPath>D:/Users/Paul/Documents/Unity projects/stamina/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
