@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: bb40b7cbac0559a4bbe4e65f36769516
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - previousRoomObject: {instanceID: 0}
+  - nextRoomObject: {instanceID: 0}
+  - pathObject: {instanceID: 0}
+  - parcelSpriteSelector: {fileID: 6771186122368992589, guid: c65d70df5e2b4bb499966c32d6541b19,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

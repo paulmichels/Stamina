@@ -1,17 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;// Required when using Event data.
+using UnityEngine.EventSystems;
 
-public class ControlPlayerScript : MonoBehaviour, IPointerUpHandler, IPointerDownHandler// These are the interfaces the OnPointerUp method requires.
+public class ControlPlayerScript : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
 
     public GameObject Player;
     private PlayerScript playerScript;
     public enum Direction : short { left, right };
     public Direction direction;
-
-    //Bouton pressé
+    
     public void OnPointerDown(PointerEventData eventData)
     {
         playerScript = Player.GetComponent<PlayerScript>();
@@ -26,8 +25,7 @@ public class ControlPlayerScript : MonoBehaviour, IPointerUpHandler, IPointerDow
                 break;
         }
     }
-
-    //Bouton relâché
+    
     public void OnPointerUp(PointerEventData eventData)
     {
         playerScript.Idle();

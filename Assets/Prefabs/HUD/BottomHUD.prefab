@@ -613,9 +613,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb40b7cbac0559a4bbe4e65f36769516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousRoom: {fileID: 6904618685519581820}
-  nextRoom: {fileID: 619272458024592068}
-  path: {fileID: 7485408846618540936}
+  previousRoomObject: {fileID: 6904618685519581820}
+  nextRoomObject: {fileID: 619272458024592068}
+  pathObject: {fileID: 7485408846618540936}
+  parcelSpriteSelector: {fileID: 6771186122368992589, guid: c65d70df5e2b4bb499966c32d6541b19,
+    type: 3}
+  roomSpriteSelector: {fileID: 2406755306230181306, guid: 7870d26836da88b468a9530ef602d4db,
+    type: 3}
 --- !u!1 &6459103008394248036
 GameObject:
   m_ObjectHideFlags: 0

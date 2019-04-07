@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b1cf2ef289df50e4e87baa379976e2d5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - roomSpriteSelector: {fileID: 2406755306230181306, guid: 7870d26836da88b468a9530ef602d4db,
+      type: 3}
+  - parcelSpriteSelector: {fileID: 6771186122368992589, guid: c65d70df5e2b4bb499966c32d6541b19,
+      type: 3}
+  - tile: {fileID: 2788950090681126676, guid: ea51c7f1c996f1349a36b668e47862ae, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
