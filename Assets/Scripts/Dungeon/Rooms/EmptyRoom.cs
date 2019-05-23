@@ -12,4 +12,9 @@ public class EmptyRoom : IRoom
     {
         Position = position;
     }
+
+    public void TriggerEvent()
+    {
+        //Rien
+    }
 }

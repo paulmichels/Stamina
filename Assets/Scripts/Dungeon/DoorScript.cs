@@ -19,16 +19,18 @@ public class DoorScript : MonoBehaviour
         switch (type)
         {
             case Type.Enter:
-                Dungeon.playerPosition = new Vector3Int(Dungeon.previousRoom.gridPos.x, Dungeon.previousRoom.gridPos.y, 0);
-                Dungeon.previousRoom = null;
-                Dungeon.nextRoom = null;
+                Dungeon.PlayerPosition = new Vector3Int(Dungeon.PreviousRoom.Position.x, Dungeon.PreviousRoom.Position.y, 0);
+                Dungeon.PreviousRoom = null;
+                Dungeon.NextRoom = null;
+                Dungeon.CurrentRoom = Dungeon.Rooms[Dungeon.PlayerPosition.x, Dungeon.PlayerPosition.y];
                 break;
 
             case Type.Exit:
-                Dungeon.playerPosition = new Vector3Int(Dungeon.nextRoom.gridPos.x, Dungeon.nextRoom.gridPos.y, 0);
-                Dungeon.previousRoom = null;
-                Dungeon.nextRoom.isExplored = true;
-                Dungeon.nextRoom = null;
+                Dungeon.PlayerPosition = new Vector3Int(Dungeon.NextRoom.Position.x, Dungeon.NextRoom.Position.y, 0);
+                Dungeon.PreviousRoom = null;
+                Dungeon.NextRoom.Explored = true;
+                Dungeon.NextRoom = null;
+                Dungeon.CurrentRoom = Dungeon.Rooms[Dungeon.PlayerPosition.x, Dungeon.PlayerPosition.y];
                 break;
         }
         StartCoroutine(fadeScript.LoadLevel("Room", fadeScript.BeginFade(1)));

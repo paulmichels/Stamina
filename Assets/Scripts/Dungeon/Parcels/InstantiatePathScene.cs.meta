@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b081f9e4676ee7648a478e15e418d0da
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - background: {instanceID: 0}
+  - door: {instanceID: 0}
+  - treasureSprite: {fileID: 21300000, guid: 28f53c0f371522e4e8f2077abc340b67, type: 3}
+  - bookSprite: {fileID: 21300000, guid: 43d9613227c85f14baf5a1d592ca8cb5, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

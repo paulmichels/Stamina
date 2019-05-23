@@ -12,4 +12,9 @@ public class BookParcel : IParcel
     {
         Position = position;
     }
+
+    public void TriggerEvent()
+    {
+        //Choisir si on lit le livre
+    }
 }

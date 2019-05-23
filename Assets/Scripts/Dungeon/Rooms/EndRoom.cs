@@ -13,4 +13,9 @@ public class EndRoom : IRoom
     {
         Position = position;
     }
+
+    public void TriggerEvent()
+    {
+        //Fin du niveau
+    }
 }

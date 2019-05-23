@@ -12,4 +12,9 @@ public class BattleParcel : IParcel
     {
         Position = position;
     }
+
+    public void TriggerEvent()
+    {
+        throw new System.NotImplementedException();
+    }
 }

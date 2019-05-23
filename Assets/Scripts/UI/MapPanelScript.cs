@@ -22,27 +22,27 @@ public class MapPanelScript : MonoBehaviour
     {
         GridLayoutGroup gridLayoutGroup = gameObject.AddComponent<GridLayoutGroup>(); //Ajoute le composant à l'objet
         gridLayoutGroup.childAlignment = TextAnchor.MiddleCenter;
-        if (Dungeon.dungeonSizeXMax - Dungeon.dungeonSizeXMin + 1 > Dungeon.dungeonSizeYMax - Dungeon.dungeonSizeYMin + 1)
+        if (Dungeon.DungeonSizeXMax - Dungeon.DungeonSizeXMin + 1 > Dungeon.DungeonSizeYMax - Dungeon.DungeonSizeYMin + 1)
         {
-            gridLayoutGroup.cellSize = new Vector2(rectTransform.sizeDelta.x / (Dungeon.dungeonSizeXMax - Dungeon.dungeonSizeXMin + 1), //Taille des cellules
-                                         rectTransform.sizeDelta.y / (Dungeon.dungeonSizeXMax - Dungeon.dungeonSizeXMin + 1));
+            gridLayoutGroup.cellSize = new Vector2(rectTransform.sizeDelta.x / (Dungeon.DungeonSizeXMax - Dungeon.DungeonSizeXMin + 1), //Taille des cellules
+                                         rectTransform.sizeDelta.y / (Dungeon.DungeonSizeXMax - Dungeon.DungeonSizeXMin + 1));
             gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount; //Ajout de la contrainte colonne max
-            gridLayoutGroup.constraintCount = Dungeon.dungeonSizeXMax - Dungeon.dungeonSizeXMin + 1; //Colonne max
+            gridLayoutGroup.constraintCount = Dungeon.DungeonSizeXMax - Dungeon.DungeonSizeXMin + 1; //Colonne max
         }
         else
         {
-            gridLayoutGroup.cellSize = new Vector2(rectTransform.sizeDelta.x / (Dungeon.dungeonSizeYMax - Dungeon.dungeonSizeYMin + 1), //Taille des cellules
-                                         rectTransform.sizeDelta.y / (Dungeon.dungeonSizeYMax - Dungeon.dungeonSizeYMin + 1));
+            gridLayoutGroup.cellSize = new Vector2(rectTransform.sizeDelta.x / (Dungeon.DungeonSizeYMax - Dungeon.DungeonSizeYMin + 1), //Taille des cellules
+                                         rectTransform.sizeDelta.y / (Dungeon.DungeonSizeYMax - Dungeon.DungeonSizeYMin + 1));
             gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedRowCount; //Ajout de la contrainte colonne max
-            gridLayoutGroup.constraintCount = Dungeon.dungeonSizeYMax - Dungeon.dungeonSizeYMin + 1; //Colonne max
+            gridLayoutGroup.constraintCount = Dungeon.DungeonSizeYMax - Dungeon.DungeonSizeYMin + 1; //Colonne max
         }
     }
 
     private void FillGrid()
     {
-        for (int y = Dungeon.dungeonSizeYMax; y >= Dungeon.dungeonSizeYMin; y--)
+        for (int y = Dungeon.DungeonSizeYMax; y >= Dungeon.DungeonSizeYMin; y--)
         {
-            for(int x = Dungeon.dungeonSizeXMin; x <= Dungeon.dungeonSizeXMax; x++)
+            for(int x = Dungeon.DungeonSizeXMin; x <= Dungeon.DungeonSizeXMax; x++)
             {
                 if(y % 2 == 0) //Ligne alterne salle / chemins horizontaux
                 {
@@ -75,32 +75,32 @@ public class MapPanelScript : MonoBehaviour
         GameObject tile = Instantiate(tilePrefab, gameObject.transform);
         //Titre pour le débug
         tile.transform.name = "Room(" + x + "," + y + ")";
-        Room room = Dungeon.rooms[x, y];
+        IRoom room = Dungeon.Rooms[x, y];
         if (room != null)
         {
             roomSpriteSelector.GetComponent<RoomSpriteSelector>().SelectSprite(room, tile.AddComponent<Image>());
-            if (room.gridPos.x == Dungeon.playerPosition.x && room.gridPos.y == Dungeon.playerPosition.y)
+            if (room.Position.x == Dungeon.PlayerPosition.x && room.Position.y == Dungeon.PlayerPosition.y)
             {
                 PlacePlayerIcon(tile);
             }
 
             GridLayoutGroup gridLayoutGroup = gameObject.GetComponent<GridLayoutGroup>();
-            if (room.gridPos.y == Dungeon.playerPosition.y + 2 && room.gridPos.x == Dungeon.playerPosition.x)
+            if (room.Position.y == Dungeon.PlayerPosition.y + 2 && room.Position.x == Dungeon.PlayerPosition.x)
             {
                 NeighboorEvent(tile, gridLayoutGroup, Dungeon.Direction.Up);
             }
 
-            if (room.gridPos.y == Dungeon.playerPosition.y - 2 && room.gridPos.x == Dungeon.playerPosition.x)
+            if (room.Position.y == Dungeon.PlayerPosition.y - 2 && room.Position.x == Dungeon.PlayerPosition.x)
             {
                 NeighboorEvent(tile, gridLayoutGroup, Dungeon.Direction.Down);
             }
 
-            if (room.gridPos.x== Dungeon.playerPosition.x + 2 && room.gridPos.y == Dungeon.playerPosition.y)
+            if (room.Position.x== Dungeon.PlayerPosition.x + 2 && room.Position.y == Dungeon.PlayerPosition.y)
             {
                 NeighboorEvent(tile, gridLayoutGroup, Dungeon.Direction.Right);
             }
 
-            if (room.gridPos.x== Dungeon.playerPosition.x - 2 && room.gridPos.y == Dungeon.playerPosition.y)
+            if (room.Position.x== Dungeon.PlayerPosition.x - 2 && room.Position.y == Dungeon.PlayerPosition.y)
             {
                 NeighboorEvent(tile, gridLayoutGroup, Dungeon.Direction.Left);
             }
@@ -112,14 +112,14 @@ public class MapPanelScript : MonoBehaviour
         GameObject tile = Instantiate(tilePrefab, gameObject.transform);
         //Titre pour le débug
         tile.transform.name = "Path("+x + "," + y+")";
-        Parcel parcel = Dungeon.parcels[x, y, 0];
-        if (Dungeon.dungeonSizeXMax - Dungeon.dungeonSizeXMin + 1 > Dungeon.dungeonSizeYMax - Dungeon.dungeonSizeYMin + 1)
+        IParcel parcel = Dungeon.Parcels[x, y, 0];
+        if (Dungeon.DungeonSizeXMax - Dungeon.DungeonSizeXMin + 1 > Dungeon.DungeonSizeYMax - Dungeon.DungeonSizeYMin + 1)
         {
             if (parcel != null)
             {
                 GridLayoutGroup gridLayoutGroup = tile.AddComponent<GridLayoutGroup>();
-                gridLayoutGroup.cellSize = new Vector2(rectTransform.sizeDelta.x / ((Dungeon.dungeonSizeXMax - Dungeon.dungeonSizeXMin + 1) * Dungeon.numberOfParcels), //Taille des cellules
-                                             rectTransform.sizeDelta.y / ((Dungeon.dungeonSizeXMax - Dungeon.dungeonSizeXMin + 1) * Dungeon.numberOfParcels));
+                gridLayoutGroup.cellSize = new Vector2(rectTransform.sizeDelta.x / ((Dungeon.DungeonSizeXMax - Dungeon.DungeonSizeXMin + 1) * Dungeon.NumberOfParcels), //Taille des cellules
+                                             rectTransform.sizeDelta.y / ((Dungeon.DungeonSizeXMax - Dungeon.DungeonSizeXMin + 1) * Dungeon.NumberOfParcels));
                 gridLayoutGroup.childAlignment = TextAnchor.MiddleCenter;
                 if (isHorizontal)
                 {
@@ -132,11 +132,11 @@ public class MapPanelScript : MonoBehaviour
                     gridLayoutGroup.constraintCount = 1; //Ligne max
                 }
 
-                for (int z = 0; z < Dungeon.numberOfParcels; z++)
+                for (int z = 0; z < Dungeon.NumberOfParcels; z++)
                 {
                     GameObject pathTile = Instantiate(tilePrefab, tile.transform);
                     pathTile.transform.name = "PathTile" + z;
-                    parcel = Dungeon.parcels[x, y, z];
+                    parcel = Dungeon.Parcels[x, y, z];
                     if (parcel != null)
                     {
                         parcelSpriteSelector.GetComponent<ParcelSpriteSelector>().SelectSprite(parcel, pathTile.AddComponent<Image>());
@@ -149,8 +149,8 @@ public class MapPanelScript : MonoBehaviour
             if (parcel != null)
             {
                 GridLayoutGroup gridLayoutGroup = tile.AddComponent<GridLayoutGroup>();
-                gridLayoutGroup.cellSize = new Vector2(rectTransform.sizeDelta.x / ((Dungeon.dungeonSizeYMax - Dungeon.dungeonSizeYMin + 1) * Dungeon.numberOfParcels), //Taille des cellules
-                                             rectTransform.sizeDelta.y / ((Dungeon.dungeonSizeYMax - Dungeon.dungeonSizeYMin + 1) * Dungeon.numberOfParcels));
+                gridLayoutGroup.cellSize = new Vector2(rectTransform.sizeDelta.x / ((Dungeon.DungeonSizeYMax - Dungeon.DungeonSizeYMin + 1) * Dungeon.NumberOfParcels), //Taille des cellules
+                                             rectTransform.sizeDelta.y / ((Dungeon.DungeonSizeYMax - Dungeon.DungeonSizeYMin + 1) * Dungeon.NumberOfParcels));
                 gridLayoutGroup.childAlignment = TextAnchor.MiddleCenter;
                 if (isHorizontal)
                 {
@@ -163,11 +163,11 @@ public class MapPanelScript : MonoBehaviour
                     gridLayoutGroup.constraintCount = 1; //Ligne max
                 }
 
-                for (int z = 0; z < Dungeon.numberOfParcels; z++)
+                for (int z = 0; z < Dungeon.NumberOfParcels; z++)
                 {
                     GameObject pathTile = Instantiate(new GameObject(), tile.transform);
                     pathTile.transform.name = "PathTile" + z;
-                    parcel = Dungeon.parcels[x, y, z];
+                    parcel = Dungeon.Parcels[x, y, z];
                     if (parcel != null)
                     {
                         parcelSpriteSelector.GetComponent<ParcelSpriteSelector>().SelectSprite(parcel, pathTile.AddComponent<Image>());
@@ -212,30 +212,30 @@ public class MapPanelScript : MonoBehaviour
 
     private void GoToPath(Dungeon.Direction direction)
     {
-        Dungeon.previousRoom = Dungeon.rooms[Dungeon.playerPosition.x, Dungeon.playerPosition.y];
+        Dungeon.PreviousRoom = Dungeon.Rooms[Dungeon.PlayerPosition.x, Dungeon.PlayerPosition.y];
         switch (direction)
         {
             case Dungeon.Direction.Up:
-                Dungeon.nextRoom = Dungeon.rooms[Dungeon.playerPosition.x, Dungeon.playerPosition.y + 2];
-                Dungeon.playerPosition.Set(Dungeon.playerPosition.x, Dungeon.playerPosition.y + 1, Dungeon.numberOfParcels - 1);
+                Dungeon.NextRoom = Dungeon.Rooms[Dungeon.PlayerPosition.x, Dungeon.PlayerPosition.y + 2];
+                Dungeon.PlayerPosition.Set(Dungeon.PlayerPosition.x, Dungeon.PlayerPosition.y + 1, Dungeon.NumberOfParcels - 1);
                 Dungeon.direction = direction;
                 break;
 
             case Dungeon.Direction.Down:
-                Dungeon.nextRoom = Dungeon.rooms[Dungeon.playerPosition.x, Dungeon.playerPosition.y - 2];
-                Dungeon.playerPosition.Set(Dungeon.playerPosition.x, Dungeon.playerPosition.y - 1, 0);
+                Dungeon.NextRoom = Dungeon.Rooms[Dungeon.PlayerPosition.x, Dungeon.PlayerPosition.y - 2];
+                Dungeon.PlayerPosition.Set(Dungeon.PlayerPosition.x, Dungeon.PlayerPosition.y - 1, 0);
                 Dungeon.direction = direction;
                 break;
 
             case Dungeon.Direction.Right:
-                Dungeon.nextRoom = Dungeon.rooms[Dungeon.playerPosition.x + 2, Dungeon.playerPosition.y];
-                Dungeon.playerPosition.Set(Dungeon.playerPosition.x + 1, Dungeon.playerPosition.y, 0);
+                Dungeon.NextRoom = Dungeon.Rooms[Dungeon.PlayerPosition.x + 2, Dungeon.PlayerPosition.y];
+                Dungeon.PlayerPosition.Set(Dungeon.PlayerPosition.x + 1, Dungeon.PlayerPosition.y, 0);
                 Dungeon.direction = direction;
                 break;
 
             case Dungeon.Direction.Left:
-                Dungeon.nextRoom = Dungeon.rooms[Dungeon.playerPosition.x - 2, Dungeon.playerPosition.y];
-                Dungeon.playerPosition.Set(Dungeon.playerPosition.x - 1, Dungeon.playerPosition.y, Dungeon.numberOfParcels - 1);
+                Dungeon.NextRoom = Dungeon.Rooms[Dungeon.PlayerPosition.x - 2, Dungeon.PlayerPosition.y];
+                Dungeon.PlayerPosition.Set(Dungeon.PlayerPosition.x - 1, Dungeon.PlayerPosition.y, Dungeon.NumberOfParcels - 1);
                 Dungeon.direction = direction;
                 break;
         }

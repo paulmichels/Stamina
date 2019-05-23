@@ -46,8 +46,8 @@ MonoBehaviour:
   startRoom: {fileID: 21300000, guid: 7b67e11643d488146a47ee8aac39e7e3, type: 3}
   endRoom: {fileID: 21300000, guid: 7b67e11643d488146a47ee8aac39e7e3, type: 3}
   unexploredRoom: {fileID: 21300000, guid: 045b3378445852144adaa1d6e376602a, type: 3}
-  emptyRoom: {fileID: 21300000, guid: 6f9bd05a41198f440b7b3d13828a48c0, type: 3}
-  treasureRoom: {fileID: 21300000, guid: debb3433ef9f9f6418670d73eaaba4a6, type: 3}
+  emptyRoom: {fileID: 21300000, guid: 217c658a3aa17534d98aad987a20df98, type: 3}
+  treasureRoom: {fileID: 21300000, guid: 27c230092b1343c49bdc778606270bfa, type: 3}
   battleRoom: {fileID: 21300000, guid: fa873130ea6987b4f8778ced60ec65e1, type: 3}
   bossRoom: {fileID: 21300000, guid: fa873130ea6987b4f8778ced60ec65e1, type: 3}
   glowingEffect: {fileID: 21300000, guid: 7516765ecd262ae4ebad599360639216, type: 3}

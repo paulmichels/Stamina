@@ -12,4 +12,9 @@ public class EmptyParcel : IParcel
     {
         Position = position;
     }
+
+    public void TriggerEvent()
+    {
+        //Rien
+    }
 }

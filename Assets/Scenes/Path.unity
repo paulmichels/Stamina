@@ -467,6 +467,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 25331635}
   door: {fileID: 896930810853927778, guid: 7b37ea502cf4f884e89719f84230cf48, type: 3}
+  treasure: {fileID: 7001744258226795777, guid: 540ce3631b5db0b47889be163d5d439a,
+    type: 3}
+  book: {fileID: 2534302039537703886, guid: 61729ded344fa3f48841e2e2b5e6cf3e, type: 3}
 --- !u!1 &536082926
 GameObject:
   m_ObjectHideFlags: 0

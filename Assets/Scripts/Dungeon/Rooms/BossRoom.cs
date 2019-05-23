@@ -12,4 +12,9 @@ public class BossRoom : IRoom
     {
         Position = position;
     }
+
+    public void TriggerEvent()
+    {
+        throw new System.NotImplementedException();
+    }
 }

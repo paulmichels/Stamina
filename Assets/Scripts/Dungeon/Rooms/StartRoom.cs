@@ -12,4 +12,9 @@ public class StartRoom : IRoom
     {
         Position = position;
     }
+
+    public void TriggerEvent()
+    {
+        //Rien
+    }
 }

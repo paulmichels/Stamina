@@ -12,4 +12,9 @@ public class TrapRoom : IRoom
     {
         Position = position;
     }
+
+    public void TriggerEvent()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -12,4 +12,9 @@ public class TreasureParcel : IParcel
     {
         Position = position;
     }
+
+    public void TriggerEvent()
+    {
+        //Choisir si on ouvre le coffre
+    }
 }

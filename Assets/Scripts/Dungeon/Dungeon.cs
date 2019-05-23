@@ -19,6 +19,7 @@ public static class Dungeon
     public static Vector3Int PlayerPosition;
 
     //Scene Room
+    public static IRoom CurrentRoom { get; set; }
     public static IRoom EndRoom { get; set; }
     public static IRoom PreviousRoom { get; set; }
     public static IRoom NextRoom { get; set; }
@@ -60,6 +61,7 @@ public static class Dungeon
 
         Rooms[randomStartPositionX, randomStartPositionY] = new StartRoom(randomPosition);
         Rooms[randomStartPositionX, randomStartPositionY].Explored = true;
+        CurrentRoom = Rooms[randomStartPositionX, randomStartPositionY];
         PlayerPosition = new Vector3Int(randomStartPositionX, randomStartPositionY, 0);
         takenPositions.Insert(0, randomPosition);
 
@@ -168,6 +170,12 @@ public static class Dungeon
         return parcel;
     }
 
+
+    private static IRoom RandomizeRoom(Vector2Int position)
+    {
+        return new BattleRoom(position);
+    }
+    /*
     private static IRoom RandomizeRoom(Vector2Int position)
     {
         IRoom room = null;
@@ -180,13 +188,9 @@ public static class Dungeon
         {
             room = new TreasureRoom(position);
         }
-        else if (random >= 41 && random <= 60)
+        else if (random >= 41 && random <= 80)
         {
             room = new EmptyRoom(position);
-        }
-        else if (random >= 61 && random <= 80)
-        {
-            room = new TrapRoom(position);
         }
         else if (random >= 81 && random <= 100)
         {
@@ -194,11 +198,19 @@ public static class Dungeon
         }
         return room;
     }
+    */
 
     //TODO : return bool
     private static void NewNeighbour(Vector2Int roomPosition, Vector2Int newNeighbourPosition, int i)
     {
-        Rooms[newNeighbourPosition.x, newNeighbourPosition.y] = RandomizeRoom(newNeighbourPosition);
+        if(i == NumberOfRooms - 1)
+        {
+            Rooms[newNeighbourPosition.x, newNeighbourPosition.y] = new EndRoom(newNeighbourPosition);
+        }
+        else
+        {
+            Rooms[newNeighbourPosition.x, newNeighbourPosition.y] = RandomizeRoom(newNeighbourPosition);
+        }
         takenPositions.Insert(i, newNeighbourPosition);
     }
 

@@ -14,25 +14,25 @@ public class MinimapPanelScript : MonoBehaviour
     private void Awake()
     {
         CreatePath();
-        roomSpriteSelector.GetComponent<RoomSpriteSelector>().SelectSprite(Dungeon.nextRoom, nextRoomObject.GetComponent<Image>());
-        roomSpriteSelector.GetComponent<RoomSpriteSelector>().SelectSprite(Dungeon.previousRoom, previousRoomObject.GetComponent<Image>());
+        roomSpriteSelector.GetComponent<RoomSpriteSelector>().SelectSprite(Dungeon.NextRoom, nextRoomObject.GetComponent<Image>());
+        roomSpriteSelector.GetComponent<RoomSpriteSelector>().SelectSprite(Dungeon.PreviousRoom, previousRoomObject.GetComponent<Image>());
     }
 
     private void CreatePath()
     {
         GridLayoutGroup gridLayoutGroup = pathObject.GetComponent<GridLayoutGroup>();
         Vector2 sizePathObject = pathObject.GetComponent<RectTransform>().sizeDelta;
-        gridLayoutGroup.cellSize = new Vector2(sizePathObject.x/ Dungeon.numberOfParcels, sizePathObject.x / Dungeon.numberOfParcels);
+        gridLayoutGroup.cellSize = new Vector2(sizePathObject.x/ Dungeon.NumberOfParcels, sizePathObject.x / Dungeon.NumberOfParcels);
         if (Dungeon.direction == Dungeon.Direction.Down || Dungeon.direction == Dungeon.Direction.Right)
         {
-            for (int z = 0; z < Dungeon.numberOfParcels; z++)
+            for (int z = 0; z < Dungeon.NumberOfParcels; z++)
             {
                 CreateTile(gridLayoutGroup, z);
             }
         }
         else
         {
-            for (int z = Dungeon.numberOfParcels - 1; z >= 0; z--)
+            for (int z = Dungeon.NumberOfParcels - 1; z >= 0; z--)
             {
                 CreateTile(gridLayoutGroup, z);
             }
@@ -44,7 +44,7 @@ public class MinimapPanelScript : MonoBehaviour
         GameObject parcelTile = Instantiate(new GameObject(), pathObject.transform);
         parcelTile.transform.name = "PathTile" + z;
         Image image = parcelTile.AddComponent<Image>();
-        parcelSpriteSelector.GetComponent<ParcelSpriteSelector>().SelectSprite(Dungeon.parcels[Dungeon.playerPosition.x, Dungeon.playerPosition.y, z], image);
+        parcelSpriteSelector.GetComponent<ParcelSpriteSelector>().SelectSprite(Dungeon.Parcels[Dungeon.PlayerPosition.x, Dungeon.PlayerPosition.y, z], image);
 
         //Creation de l'effet 
         GameObject highlight = Instantiate(new GameObject(), parcelTile.transform);
@@ -61,7 +61,7 @@ public class MinimapPanelScript : MonoBehaviour
     public void RefreshParcelSprites(Vector3Int position, bool isCurrentParcel)
     {
         GameObject pathTile = GameObject.Find("PathTile" + position.z);
-        parcelSpriteSelector.GetComponent<ParcelSpriteSelector>().SelectSprite(Dungeon.parcels[position.x, position.y, position.z], pathTile.GetComponent<Image>());
+        parcelSpriteSelector.GetComponent<ParcelSpriteSelector>().SelectSprite(Dungeon.Parcels[position.x, position.y, position.z], pathTile.GetComponent<Image>());
         pathTile.transform.GetChild(0).gameObject.GetComponent<Image>().enabled = isCurrentParcel;
     }
 }
