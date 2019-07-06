@@ -10,12 +10,12 @@ public class Netflex : IEnemy
     public Dungeon.Zone Type { get; set; }
     public Sprite EnemySprite { get; set; }
 
-    public Netflex()
+    public Netflex(EnemySpriteSelector enemySpriteSelector)
     {
         EnemyName = "Netflex";
         Health = 70;
         Attack = 5;
         Type = Dungeon.Zone.Algorithmique;
-        EnemySprite = Resources.Load<Sprite>("Assets/Sprites/Items/Banner_003.png");
+        EnemySprite = enemySpriteSelector.Netflex;
     }
 }

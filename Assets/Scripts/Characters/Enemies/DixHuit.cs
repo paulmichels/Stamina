@@ -10,12 +10,12 @@ public class DixHuit : IEnemy
     public Dungeon.Zone Type { get; set; }
     public Sprite EnemySprite { get; set; }
     
-    public DixHuit()
+    public DixHuit(EnemySpriteSelector enemySpriteSelector)
     {
         EnemyName = "DixHuit";
         Health = 100;
         Attack = 20;
         Type = Dungeon.Zone.Algorithmique;
-        EnemySprite = Resources.Load<Sprite>("Assets/Sprites/Items/Banner_004.png");
+        EnemySprite = enemySpriteSelector.DixHuit;
     }
 }

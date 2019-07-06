@@ -10,12 +10,12 @@ public class Astichaut : IEnemy
     public Dungeon.Zone Type { get; set; }
     public Sprite EnemySprite { get; set; }
 
-    public Astichaut()
+    public Astichaut(EnemySpriteSelector enemySpriteSelector)
     {
         EnemyName = "Astichaut";
         Health = 70;
         Attack = 20;
         Type = Dungeon.Zone.Algorithmique;
-        EnemySprite = Resources.Load<Sprite>("Assets/Sprites/Items/Banner_002.png");
+        EnemySprite = enemySpriteSelector.Astichaut;
     }
 }

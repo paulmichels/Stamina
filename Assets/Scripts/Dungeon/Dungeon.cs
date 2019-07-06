@@ -145,6 +145,11 @@ public static class Dungeon
 
     private static IParcel RandomizeParcel(Vector3Int position)
     {
+        return new BattleParcel(position);
+    }
+    /*
+    private static IParcel RandomizeParcel(Vector3Int position)
+    {
         IParcel parcel = null;
         int random = Random.Range(1, 101);
         if (random >= 1 && random <= 20)
@@ -169,6 +174,7 @@ public static class Dungeon
         }
         return parcel;
     }
+    */
 
 
     private static IRoom RandomizeRoom(Vector2Int position)

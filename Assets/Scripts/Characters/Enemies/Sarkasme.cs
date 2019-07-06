@@ -10,12 +10,12 @@ public class Sarkasme : IEnemy
     public Dungeon.Zone Type { get; set; }
     public Sprite EnemySprite { get; set; }
 
-    public Sarkasme()
+    public Sarkasme(EnemySpriteSelector enemySpriteSelector)
     {
         EnemyName = "Sarkasme";
         Health = 150;
         Attack = 10;
         Type = Dungeon.Zone.Algorithmique;
-        EnemySprite = Resources.Load<Sprite>("Assets/Sprites/Items/Banner_001.png");
+        EnemySprite = enemySpriteSelector.Sarkasme;
     }
 }

@@ -96,6 +96,7 @@
     <Compile Include="Assets\Scripts\Effects\SceneTransitions\FadeScript.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IEnemy.cs" />
     <Compile Include="Assets\Scripts\ScenesTransitions\SceneTransition.cs" />
+    <Compile Include="Assets\Scripts\SpriteSelector\EnemySpriteSelector.cs" />
     <Compile Include="Assets\Scripts\SpriteSelector\ParcelSpriteSelector.cs" />
     <Compile Include="Assets\Scripts\SpriteSelector\RoomSpriteSelector.cs" />
     <Compile Include="Assets\Scripts\UI\HUDScript.cs" />

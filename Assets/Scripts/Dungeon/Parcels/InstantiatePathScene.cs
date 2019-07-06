@@ -30,7 +30,7 @@ public class InstantiatePathScene : MonoBehaviour
             {
                 GameObject exitDoor = Instantiate(door, middlegroundLayer.transform);
                 exitDoor.GetComponent<DoorScript>().type = DoorScript.Type.Exit;
-                exitDoor.GetComponent<Transform>().position = new Vector3(rectTransform.position.x, middlegroundLayer.transform.Find("EnterDoor").GetComponent<Transform>().position.y, 0);
+                exitDoor.GetComponent<Transform>().position = new Vector3(rectTransform.position.x-500, middlegroundLayer.transform.Find("EnterDoor").GetComponent<Transform>().position.y, 0);
             }
             else //Une parcelle avec un evenement potentiel
             {
@@ -60,6 +60,47 @@ public class InstantiatePathScene : MonoBehaviour
                     GameObject bookObject = Instantiate(book);
                     RectTransform bookTransform = bookObject.GetComponent<RectTransform>();
                     bookTransform.position = new Vector3(rectTransform.position.x, rectTransform.position.y - 100, rectTransform.position.z);
+                }
+                else if(parcel.GetType() == typeof(BattleParcel))
+                {
+                    GameObject position1 = Instantiate(
+                        new GameObject(), 
+                        new Vector3(rectTransform.position.x - 140, rectTransform.position.y - 100, rectTransform.position.z + 100), 
+                        Quaternion.identity, 
+                        middlegroundLayer.transform
+                    );
+                    GameObject position2 = Instantiate(
+                        new GameObject(),
+                        new Vector3(rectTransform.position.x, rectTransform.position.y - 100, rectTransform.position.z + 100),
+                        Quaternion.identity,
+                        middlegroundLayer.transform
+                    );
+                    GameObject position3 = Instantiate(
+                        new GameObject(),
+                        new Vector3(rectTransform.position.x + 140, rectTransform.position.y - 100, rectTransform.position.z + 100),
+                        Quaternion.identity,
+                        middlegroundLayer.transform
+                    );
+                    GameObject position4 = Instantiate(
+                        new GameObject(),
+                        new Vector3(rectTransform.position.x + 280, rectTransform.position.y - 100, rectTransform.position.z + 100),
+                        Quaternion.identity,
+                        middlegroundLayer.transform
+                    );
+                    if (Dungeon.direction == Dungeon.Direction.Down || Dungeon.direction == Dungeon.Direction.Right)
+                    {
+                        position1.name = "Parcel" + (Dungeon.PlayerPosition.z + i) + "Position1";
+                        position2.name = "Parcel" + (Dungeon.PlayerPosition.z + i) + "Position2";
+                        position3.name = "Parcel" + (Dungeon.PlayerPosition.z + i) + "Position3";
+                        position4.name = "Parcel" + (Dungeon.PlayerPosition.z + i) + "Position4";
+                    }
+                    else
+                    {
+                        position1.name = "Parcel" + (Dungeon.PlayerPosition.z - i + 2) + "Position1";
+                        position2.name = "Parcel" + (Dungeon.PlayerPosition.z - i + 2) + "Position2";
+                        position3.name = "Parcel" + (Dungeon.PlayerPosition.z - i + 2) + "Position3";
+                        position4.name = "Parcel" + (Dungeon.PlayerPosition.z - i + 2) + "Position4";
+                    }
                 }
             }
         }

@@ -10,12 +10,12 @@ public class Fhlaime : IEnemy
     public Dungeon.Zone Type { get; set; }
     public Sprite EnemySprite { get; set; }
     
-    public Fhlaime()
+    public Fhlaime(EnemySpriteSelector enemySpriteSelector)
     {
         EnemyName = "Fhlaime";
         Health = 70;
         Attack = 20;
         Type = Dungeon.Zone.Algorithmique;
-        EnemySprite = Resources.Load<Sprite>("Assets/Sprites/Items/Banner_002.png");
+        EnemySprite = enemySpriteSelector.Fhlaime;
     }
 }
